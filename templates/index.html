@@ -1,0 +1,74 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+<section class="ftco-section" id="mytab" role="tablist">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                {% for blog in blogs %}
+                	<div class="case">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-xl-8 d-flex">
+                            <a href="{{ blog.get_absolute_url }}" class="img w-100 mb-3 mb-md-0"
+                               style="background-image: url('{{ blog.image.url }}');"></a>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-4 d-flex">
+                            <div class="text w-100 pl-md-3">
+                                <span class="subheading">{{ blog.category }}</span>
+                                <h2><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></h2>
+                                <ul class="media-social list-unstyled">
+                                    <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                                    <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                                </ul>
+                                <div class="meta">
+                                    <p class="mb-0"><a href="#">{{ blog.created|date:"d/m/Y" }}</a> | <a href="#">12 min read</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col text-center">
+                <div class="block-27">
+                    <ul>
+                     {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a href="?page={{ page_obj.previous_page_number }}#mytab"><</a>
+                                </li>
+
+                                 <li>
+                                    <a href="?page={{ page_obj.previous_page_number }}#mytab">{{ page_obj.previous_page_number }}</a>
+                                </li>
+
+                     {% endif %}
+
+                                <li class="page-item active">
+                                    <a href="?page={{ page_obj.number }}#mytab">{{ page_obj.number }}</a>
+                                </li>
+
+                    {% if page_obj.has_next %}
+
+                                <li >
+                                    <a href="?page={{ page_obj.next_page_number }}#mytab">{{ page_obj.next_page_number }}</a>
+                                </li>
+
+                                <li>
+                                    <a href="?page={{ page_obj.next_page_number }}#mytab">></a>
+                                </li>
+                    {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
